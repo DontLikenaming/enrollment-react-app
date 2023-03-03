@@ -18,8 +18,8 @@ const EnrollmentForm = (props) => {
     const [msgStyle, setMsgStyle] = useState('');
     // 등록하기 버튼을 누르면 setwelcomeMessage에 firstName과 lastName를 가져와
     // 환영 메세지를 만들어서 출력시킴
-    const handleSubmit = (e) => {
-        if(firstName===""||lastName==="")return false;
+    const handleClick = (e) => {
+        // if(firstName===""||lastName==="")return false;
         let msg = "더 이상 신청할 수 없습니다.";
         setMsgStyle("redOne");
         // props로 전달받은 setUpdateSeats 함수를 이용해서
@@ -29,6 +29,14 @@ const EnrollmentForm = (props) => {
             msg = `환영합니다, ${firstName} ${lastName} 님.
             ${email}로 메일이 전송되었습니다. 확인 부탁드립니다.`;
             props.setUpdateSeats(props.currentSeat-1);  // 참여 가능 인원수 감소
+
+            // 등록 완료된 학생정보에 사용할 key 생성
+            const rndKey = Math.floor(1000+Math.random()*9000);
+            // 생성한 key와 등록 완료된 학생정보를 props에 저장
+            let stud = {key: rndKey, fname: firstName, lname: lastName,
+                        program: props.chosenProgram, email: email};
+            console.log(stud);
+            props.setStudDetails(stud);
         }
         setwelcomeMessage(msg);
         e.preventDefault(); // submit 기능 중지
@@ -40,7 +48,7 @@ const EnrollmentForm = (props) => {
     return (
     <div>
         <div className="enrolContainer">
-            <form className="enrolForm" onSubmit={handleSubmit}>
+            <form className="enrolForm">
                 <ul className="ulEnrol">
                     <li>
                         <label htmlFor="FirstName"></label>
@@ -75,7 +83,7 @@ const EnrollmentForm = (props) => {
                     <li id="center-btn">
                         <button type="submit"
                                 id="btnEnrol" name="btnEnrol"
-                                onClick={handleSubmit}>등록하기</button>
+                                onClick={handleClick}>등록하기</button>
                     </li>
                     <li>
                         <label id="studentMsg" className={msgStyle}>{welcomeMessage}</label>
