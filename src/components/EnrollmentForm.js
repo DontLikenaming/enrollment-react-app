@@ -3,9 +3,18 @@ import { useState } from 'react';
 import '../App.css';
 
 const EnrollmentForm = () => {
+    // 폼에 입력한 내용(First Name과 Last Name)을 기억시키기 위해
+    // state형 변수 선언
+    // --------------------------------------------------------
+    // onBlur 이벤트가 발생하면 입력된 값을
+    // 각각 setFirstName과 setLastName을 통해 저장함
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    // state형 변수에 저장된 fname과 lname을 환영 메세지로 출력하기 위해 선언
     const [welcomeMessage, setwelcomeMessage] = useState('');
+
+    // 등록하기 버튼을 누르면 setwelcomeMessage에 firstName과 lastName를 가져와
+    // 환영 메세지를 만들어서 출력시킴
     const handleSubmit = (e) => {
         if(firstName===""||lastName==="")return false;
         setwelcomeMessage(`환영합니다, ${firstName} ${lastName} 님.`);
