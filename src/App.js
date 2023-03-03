@@ -7,7 +7,7 @@ import EnrollmentForm from './components/EnrollmentForm';
 const App = () => {
     const [program, setProgram] = useState("UG");   // 프로그램 종류
     const [ugseats, setUgSeats] = useState(60);        // UG 참가가능 인원수
-    const [pgseats, setPgSeats] = useState(0);        // PG 참가가능 인원수
+    const [pgseats, setPgSeats] = useState(40);        // PG 참가가능 인원수
     const handleChange = (e) => {
         setProgram(e.target.value);
     };
@@ -18,19 +18,17 @@ const App = () => {
     };
     return(
         <div className="App">
-                <div className="programs">
-                    <label>학사 프로그램 참가 가능 인원수 : {ugseats} 명</label>
-                    <br />
-                    <label>석사 프로그램 참가 가능 인원수 : {pgseats} 명</label>
-                    <br /><br />
-                    <label>프로그램 종류 :&nbsp;
-                        <select className="appDropDowns"
-                                onChange={handleChange} value={program}>
-                            <option value="UG">&nbsp;학사과정(대학생)&nbsp;</option>
-                            <option value="PG">&nbsp;석사과정(대학원생)&nbsp;</option>
-                        </select>
-                        <br /><br />
-                    </label>
+                <div className="programs" >
+                    <h2 className="title">프로그램 참가 등록양식</h2>
+                    <ul className="ulEnrol">
+                        <li onChange={handleChange} className="parentLabels">
+                            <input type="radio" value="UG" name="programGroup" defaultChecked/>학사과정
+                            &nbsp;
+                            <input type="radio" value="PG" name="programGroup"/>석사과정
+                        </li>
+                        <li>{program} 참가 가능 인원 : {(program==="UG")?ugseats:pgseats}</li>
+                    </ul>
+
                 </div>
             <EnrollmentForm chosenProgram={program}
                             currentSeat={(program==="UG")?ugseats:pgseats}
