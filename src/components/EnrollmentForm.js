@@ -36,6 +36,7 @@ const EnrollmentForm = (props) => {
     const handleInputChange = (setInput, e) => {
         setInput(e.target.value);
     };
+
     return (
     <div>
         <div className="enrolContainer">

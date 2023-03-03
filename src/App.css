@@ -86,13 +86,13 @@
 }
 .message {
     color:rgba(31, 226, 80, 0.671);
+    font-style: italic;
     font-size: 22px;
 }
 .redOne {
     color: red;
     font-style: italic;
     font-size: 35px;
-    display: flex;
 }
 .actionIcon {
     font-size: 22px;

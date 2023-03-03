@@ -1,13 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
 import EnrollmentForm from './components/EnrollmentForm';
+import EnrolList from './components/EnrolList';
+
 
 // EnrollmentForm이라는 폼을 return하도록
 // 정의된 App 컴퍼넌트
 const App = () => {
     const [program, setProgram] = useState("UG");   // 프로그램 종류
     const [ugseats, setUgSeats] = useState(60);        // UG 참가가능 인원수
-    const [pgseats, setPgSeats] = useState(40);        // PG 참가가능 인원수
+    const [pgseats, setPgSeats] = useState(0);        // PG 참가가능 인원수
     const handleChange = (e) => {
         setProgram(e.target.value);
     };
@@ -34,6 +36,7 @@ const App = () => {
                             currentSeat={(program==="UG")?ugseats:pgseats}
                             setUpdateSeats={setUpdateSeats}
             />
+            <EnrolList />
         </div>
     );
 };
