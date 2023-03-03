@@ -18,6 +18,9 @@ const EnrollmentForm = (props) => {
     const handleSubmit = (e) => {
         if(firstName===""||lastName==="")return false;
         setwelcomeMessage(`환영합니다, ${firstName} ${lastName} 님.`);
+        // props로 전달받은 setUpdateSeats 함수를 이용해서
+        // 상위 컴퍼넌트의 Seat 변수값을 조작함
+        props.setUpdateSeats(props.currentSeat-1);  // 참여 가능 인원수 감소
         e.preventDefault(); // submit 기능 중지
     };
     return (

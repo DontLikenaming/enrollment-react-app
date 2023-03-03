@@ -8,13 +8,6 @@ import App from './App';
 // 해당 컴퍼넌트를 표시함
 // render(컴퍼넌트, 표시위치)
 
-ReactDOM.render(
-  <React.StrictMode>
-      <h1>Just React</h1>
-  </React.StrictMode>,
-    document.getElementById('app')
-);
-
 // App이라는 컴퍼넌트를 #root에 표시
 ReactDOM.render(
     <React.StrictMode>
