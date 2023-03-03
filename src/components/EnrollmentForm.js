@@ -19,14 +19,18 @@ const EnrollmentForm = (props) => {
     // 등록하기 버튼을 누르면 setwelcomeMessage에 firstName과 lastName를 가져와
     // 환영 메세지를 만들어서 출력시킴
     const handleClick = (e) => {
-        // if(firstName===""||lastName==="")return false;
         let msg = "더 이상 신청할 수 없습니다.";
         setMsgStyle("redOne");
+
+        if(firstName==="")alert("이름을 입력해주세요.");
+        else if(lastName==="")alert("성을 입력해주세요.");
+        else if(email==="")alert("이메일을 입력해주세요.");
+
         // props로 전달받은 setUpdateSeats 함수를 이용해서
         // 상위 컴퍼넌트의 Seat 변수값을 조작함
-        if(props.currentSeat>0){
+        if(props.currentSeat>0&&(firstName!==""&&lastName!==""&&email!=="")){
             setMsgStyle("message");
-            msg = `환영합니다, ${firstName} ${lastName} 님.
+            msg = `환영합니다, ${firstName} ${lastName} 님\n.
             ${email}로 메일이 전송되었습니다. 확인 부탁드립니다.`;
             props.setUpdateSeats(props.currentSeat-1);  // 참여 가능 인원수 감소
 
@@ -38,6 +42,7 @@ const EnrollmentForm = (props) => {
             console.log(stud);
             props.setStudDetails(stud);
         }
+
         setwelcomeMessage(msg);
         e.preventDefault(); // submit 기능 중지
     };

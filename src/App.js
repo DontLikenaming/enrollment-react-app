@@ -8,7 +8,7 @@ import EnrolList from './components/EnrolList';
 // 정의된 App 컴퍼넌트
 const App = () => {
     const [program, setProgram] = useState("UG");   // 프로그램 종류
-    const [ugseats, setUgSeats] = useState(60);        // UG 참가가능 인원수
+    const [ugseats, setUgSeats] = useState(0);        // UG 참가가능 인원수
     const [pgseats, setPgSeats] = useState(40);        // PG 참가가능 인원수
 
     // 과정 등록한 학생들 정보를 저장하는 변수 선언
