@@ -13,14 +13,21 @@ const EnrollmentForm = (props) => {
     // state형 변수에 저장된 fname과 lname을 환영 메세지로 출력하기 위해 선언
     const [welcomeMessage, setwelcomeMessage] = useState('');
 
+    const [msgStyle, setMsgStyle] = useState('');
     // 등록하기 버튼을 누르면 setwelcomeMessage에 firstName과 lastName를 가져와
     // 환영 메세지를 만들어서 출력시킴
     const handleSubmit = (e) => {
         if(firstName===""||lastName==="")return false;
-        setwelcomeMessage(`환영합니다, ${firstName} ${lastName} 님.`);
+        let msg = "더 이상 신청할 수 없습니다.";
+        setMsgStyle("redOne");
         // props로 전달받은 setUpdateSeats 함수를 이용해서
         // 상위 컴퍼넌트의 Seat 변수값을 조작함
-        props.setUpdateSeats(props.currentSeat-1);  // 참여 가능 인원수 감소
+        if(props.currentSeat>0){
+            setMsgStyle("message");
+            msg = `환영합니다, ${firstName} ${lastName} 님.`;
+            props.setUpdateSeats(props.currentSeat-1);  // 참여 가능 인원수 감소
+        }
+        setwelcomeMessage(msg);
         e.preventDefault(); // submit 기능 중지
     };
     return (
@@ -39,8 +46,7 @@ const EnrollmentForm = (props) => {
                     <button type="submit">등록하기</button>
                 </div>
             </form>
-
-            <label id="studentMsg" className="message" >{welcomeMessage}</label>
+            <label id="studentMsg" className={msgStyle} >{welcomeMessage}</label>
         </div>
     );
 };
