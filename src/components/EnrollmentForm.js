@@ -31,7 +31,7 @@ const EnrollmentForm = (props) => {
         // 상위 컴퍼넌트의 Seat 변수값을 조작함
         if(props.currentSeat>0&&(firstName!==""&&lastName!==""&&email!=="")){
             setMsgStyle("message");
-            msg = `환영합니다, ${firstName} ${lastName} 님\n.
+            msg = `환영합니다, ${firstName} ${lastName} 님.\n
             ${email}로 메일이 전송되었습니다. 확인 부탁드립니다.`;
             props.setUpdateSeats(props.currentSeat-1);  // 참여 가능 인원수 감소
 
@@ -40,8 +40,12 @@ const EnrollmentForm = (props) => {
             // 생성한 key와 등록 완료된 학생정보를 props에 저장
             let stud = {key: rndKey, fname: firstName, lname: lastName,
                         program: props.chosenProgram, email: email,
-                        edit: <MdEdit className="actionIcon" />,
-                        delete: <MdDelete className="actionIcon" />};
+                        edit: <MdEdit className="actionIcon"
+                        onClick={()=>props.handleItemSelection('edit',rndKey)} />,
+                        // 삭제 아이콘 클릭하면 대상의 key를 넘김
+                        delete: <MdDelete className="actionIcon"
+                        onClick={()=>props.handleItemSelection('delete',rndKey)} />
+                        }
             props.setStudDetails(stud);
         }
 
