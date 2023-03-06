@@ -53,7 +53,9 @@ const EnrolList = (props) => {
             // 삭제로 인한 참가 가능 인원수 복구
             props.restoreSeats(deleteItem.program);
         }
-        // ?
+        else {  // confirm에서 취소를 누른 경우
+            props.setAction('');    //action 초기화
+        }
 
         // 등록하기와 수정하기를 구분하는 조건 추가
         const curItemKey = props.studDetails.key;

@@ -36,9 +36,9 @@ const EnrollmentForm = (props) => {
         let msg = "더 이상 신청할 수 없습니다.";
         setMsgStyle("redOne");
 
-        if(firstName==="")alert("이름을 입력해주세요.");
-        else if(lastName==="")alert("성을 입력해주세요.");
-        else if(email==="")alert("이메일을 입력해주세요.");
+        if(firstName===""){alert("이름을 입력해주세요."); msg = "";}
+        else if(lastName===""){alert("성을 입력해주세요."); msg = "";}
+        else if(email===""){alert("이메일을 입력해주세요."); msg = "";}
 
         // props로 전달받은 setUpdateSeats 함수를 이용해서
         // 상위 컴퍼넌트의 Seat 변수값을 조작함
