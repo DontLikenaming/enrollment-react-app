@@ -57,6 +57,9 @@ const EnrolList = (props) => {
             // 삭제로 인한 참가 가능 인원수 복구
             props.restoreSeats(deleteItem.program);
         }
+        if(props.action==='edit'){
+
+        }
     }, [props]);
 
     return(
