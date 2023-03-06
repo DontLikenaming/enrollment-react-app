@@ -17,8 +17,19 @@ const App = () => {
     const [action, setAction] = useState();                      // 작업 종류 지정
     const [selItemKey, setSelItemKey] = useState();              // 등록정보 키
 
+    // 라디오 버튼 체크 상태 처리, 초기값은 true
+    const [isUGChecked, setIsUGChecked] = useState(true);
+    // 참가 가능 인원수 조정 필요 여부 설정, 초기값은 false
+    const [isRestoreSeats, setIsRestoreSeats] = useState(false);
+
     const handleChange = (e) => {
         setProgram(e.target.value);
+        // 참가 프로그램이 변경되었다면
+        setIsUGChecked(!isUGChecked);
+        if(isRestoreSeats){
+            e.target.value==='UG'?setPgSeats(pgseats+1):setUgSeats(ugseats+1);
+            setIsRestoreSeats(false);
+        }
     };
 
     // 프로그램 별 참가가능 인원수를 변경하는 함수
@@ -33,7 +44,15 @@ const App = () => {
         setSelItemKey(key);
     };
 
-    // 등록된 학생 삭제 시, 참가 가능 인원수 조정
+    // 수정 시, 선택 프로그램에 따른 인원수 조정
+    const setReSelectProgram = (RCProgram) => {
+        RCProgram==='UG'?
+            setIsUGChecked(true):setIsUGChecked(false)
+        setProgram(RCProgram);
+        setIsRestoreSeats(true);
+};
+
+    // 삭제 시, 참가 가능 인원수 조정
     const restoreSeats = (pgm) => {
         pgm === 'UG'?
             setUgSeats(ugseats+1):
@@ -47,9 +66,9 @@ const App = () => {
                     <h2 className="title">프로그램 참가 등록양식</h2>
                     <ul className="ulEnrol">
                         <li onChange={handleChange} className="parentLabels">
-                            <input type="radio" value="UG" name="programGroup" defaultChecked/>학사과정
+                            <input type="radio" value="UG" name="programGroup" defaultChecked={isUGChecked}/> 학사과정
                             &nbsp;
-                            <input type="radio" value="PG" name="programGroup"/>석사과정
+                            <input type="radio" value="PG" name="programGroup" defaultChecked={!isUGChecked}/> 석사과정
                         </li>
                         <li>{program} 참가 가능 인원 : {(program==="UG")?ugseats:pgseats}</li>
                     </ul>
@@ -60,12 +79,14 @@ const App = () => {
                             setUpdateSeats={setUpdateSeats}
                             setStudDetails={setStudDetails}
                             handleItemSelection={handleItemSelection}
+                            setReSelectProgram={setReSelectProgram}
             />
             <EnrolList setStudDetails={setStudDetails}
                        studDetails={studDetails}
                        action={action} setAction={setAction}
                        selItemKey={selItemKey}
                        restoreSeats={restoreSeats}
+
             />
         </div>
     );
