@@ -33,6 +33,14 @@ const App = () => {
         setSelItemKey(key);
     };
 
+    // 등록된 학생 삭제 시, 참가 가능 인원수 조정
+    const restoreSeats = (pgm) => {
+        pgm === 'UG'?
+            setUgSeats(ugseats+1):
+            setPgSeats(pgseats+1);
+        setAction('');
+    };
+
     return(
         <div className="App">
                 <div className="programs" >
@@ -57,7 +65,7 @@ const App = () => {
                        studDetails={studDetails}
                        action={action}
                        selItemKey={selItemKey}
-
+                       restoreSeats={restoreSeats}
             />
         </div>
     );

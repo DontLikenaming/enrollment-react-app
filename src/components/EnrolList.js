@@ -50,10 +50,12 @@ const EnrolList = (props) => {
         if(props.action==='delete'){
             // 삭제 대상 아이템을 key로 가져옴
             const deleteItem = items.filter(
-                (items) => items.key === props.selItemKey
+                (item) => item.key === props.selItemKey
             )[0];
             // 삭제 대상 아이템만 제외하고 다시 items 객체 생성
-            items = items.filter((items)=>items!==deleteItem);
+            items = items.filter((item)=>item!==deleteItem);
+            // 삭제로 인한 참가 가능 인원수 복구
+            props.restoreSeats(deleteItem.program);
         }
     }, [props]);
 
