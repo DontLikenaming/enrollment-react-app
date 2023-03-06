@@ -41,13 +41,9 @@ const EnrolList = (props) => {
     // useEffect : 컴퍼넌트 생명주기에 따라 DOM 랜더링 처리
     // props 객체에 값이 존재할 때마다 detailsList에 렌더링해서 화면에 표시함
     useEffect(() => {
-        const curItemKey = props.studDetails.key;
-        if(curItemKey){
-            items = [...items, props.studDetails];
-            props.setStudDetails({});
-        }
-        // 삭제 기능 수행
-        if(props.action==='delete'){
+        // 삭제 기능
+        // eslint-disable-next-line no-restricted-globals
+        if(props.action==='delete'&&confirm('정말로 삭제하시겠습니까?')){
             // 삭제 대상 아이템을 key로 가져옴
             const deleteItem = items.filter(
                 (item) => item.key === props.selItemKey
@@ -57,10 +53,23 @@ const EnrolList = (props) => {
             // 삭제로 인한 참가 가능 인원수 복구
             props.restoreSeats(deleteItem.program);
         }
-        if(props.action==='edit'){
+        // ?
 
+        // 등록하기와 수정하기를 구분하는 조건 추가
+        const curItemKey = props.studDetails.key;
+        if(curItemKey){
+            // 전달받은 키와 리스트에 있는 키가 일치하는 항목의 index 찾기
+            const idx = items.findIndex((item)=>item.key===curItemKey);
+            // 전달받은 키와 일치하는 항목이 리스트에 존재하면 수정하기 수행
+            if(idx>-1){items = items.map(
+                (item)=>item.key === curItemKey?props.studDetails:item
+            )}
+            // 일치하는 항목이 존재하지 않으면 등록하기 수행
+            else {items = [...items, props.studDetails];}
+            props.setStudDetails({});
         }
-    }, [props]);
+
+    });
 
     return(
         <div className="enrolList">
