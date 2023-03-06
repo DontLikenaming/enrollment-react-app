@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import '../App.css';
+import { MdEdit, MdDelete } from 'react-icons/md';
 
 const EnrollmentForm = (props) => {
     // 폼에 입력한 내용(First Name, Last Name, e-mail)을 기억시키기 위해
@@ -38,14 +39,16 @@ const EnrollmentForm = (props) => {
             const rndKey = Math.floor(1000+Math.random()*9000);
             // 생성한 key와 등록 완료된 학생정보를 props에 저장
             let stud = {key: rndKey, fname: firstName, lname: lastName,
-                        program: props.chosenProgram, email: email};
-            console.log(stud);
+                        program: props.chosenProgram, email: email,
+                        edit: <MdEdit className="actionIcon" />,
+                        delete: <MdDelete className="actionIcon" />};
             props.setStudDetails(stud);
         }
 
         setwelcomeMessage(msg);
         e.preventDefault(); // submit 기능 중지
     };
+
     const handleInputChange = (setInput, e) => {
         setInput(e.target.value);
     };

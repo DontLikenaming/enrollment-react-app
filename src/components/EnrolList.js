@@ -4,20 +4,32 @@ import { DetailsList } from '@fluentui/react/lib/DetailsList';
 import '../EnrolList.css';
 
 // 과정 등록 학생 리스트의 걸럼 정의
-
+// 각 컬럼 앞뒤로 수정, 삭제 버튼 추가
 const Columns = [
     {
-        key: 'fname', name: 'Fisrt Name', fieldName: 'fname', minWidth: 90, isResizable: false
+        key: 'edit', name : 'Edit', fieldName: 'edit', minWidth: 50,
+        isResizable: false
     },
     {
-        key: 'lname', name: 'Last Name', fieldName: 'lname', minWidth: 90, isResizable: false
+        key: 'fname', name: 'Fisrt Name', fieldName: 'fname', minWidth: 90,
+        isResizable: false
     },
     {
-        key: 'program', name: 'program', fieldName: 'program', minWidth: 90, isResizable: false
+        key: 'lname', name: 'Last Name', fieldName: 'lname', minWidth: 90,
+        isResizable: false
     },
     {
-        key: 'email', name: 'e-mail', fieldName: 'email', minWidth: 130, isResizable: false
+        key: 'program', name: 'Program', fieldName: 'program', minWidth: 90,
+        isResizable: false
     },
+    {
+        key: 'email', name: 'E-mail', fieldName: 'email', minWidth: 130,
+        isResizable: false
+    },
+    {
+        key: 'delete', name : 'Delete', fieldName: 'delete', minWidth: 50,
+        isResizable: false
+    }
 ];
 
 // 컬럼을 정의할 때 사용했던 fieldName으로 값을 초기화해야 함
